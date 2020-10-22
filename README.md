@@ -1,6 +1,6 @@
 **CPEN 221 / Fall 2020 / MiniProject 2**
 
-The Graph ADT and Social Networks
+The Graph ADT and Virtual Worlds
 ===
 
 This mini-project has two parts. Part 2 can benefit from your implementation of Part 1.
