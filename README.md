@@ -157,6 +157,7 @@ We provide a GUI to visualize the world with its items. The GUI has a simple int
 + Make sure your code is readable and follow the style guide. Follow good code hygiene by adopting practices discussed in the course notes.
 + Write clear and concise specifications for the methods that you have been asked to implement (and other methods too).
 + Write tests that provide at least 95% lines of code coverage and branch coverage in the package `ca.ubc.ece.cpen221.graphs.one`.
++ For this mini-project, we understand that testing code in this virtual environment is very difficult, and we rather you devote your time to practice code reuse. You should try to run your implementations in the GUI and experiment with different behaviors You may write test code, but we do not have any testing-related requirements for that part of the mini-project.
 + Each task is worth 1 point. For Task 6, your evaluation will be based on how effective your submission is relative to other submissions.
 
 ## Additional Hints
