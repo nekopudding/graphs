@@ -125,7 +125,7 @@ The following are the predefined rules for breeding, eating, and moving that app
 + `MoveCommand`: An `ArenaAnimal` can only move once at a time, and moving distance is restricted by its moving range. Also, it must move only to valid, empty locations.
 + `WaitCommand`: Simply doing nothing is the  final option. Note that all living items lose energy each time `getNextAction` is called, even if they choose to do nothing, so they may eventually die of hunger.
 
-The above rules needed to be obeyed strictly by the AI for rabbits and foxes competing in the arena. Your own items may handle them more flexibly (e.g., they may jump around further on the world) and may add additional `Command`s.
+The above rules needed to be obeyed strictly by the AI for rabbits and foxes. Your own items may handle them more flexibly (e.g., they may jump around further on the world) and may add additional `Command`s.
 
 #### Implementing `Item`s With Reuse
 
@@ -139,7 +139,7 @@ You must implement the AI for rabbits and foxes by implementing the AI interface
 
 The AI for rabbits and foxes is restricted in flexibility compared what other actors can do. They can only see nearby parts of the world through the `ArenaWorld` interface and may only return the predefined commands obeying the rules above.
 
-Note that the AI should only rely on the interface contracts of arena animals, but not on specific implementations. For instance, we may chose to modify the size of the world, the energy limits, or the view ranges of animals in the actual competition. Returning invalid commands or attempting to cheat by casting the `ArenaWorld` to `World`, or casting other objects to specific implementations, may lead to the exclusion from the competition.
+Note that the AI should only rely on the interface contracts of arena animals, but not on specific implementations. For instance, we may chose to modify the size of the world, the energy limits, or the view ranges of animals. Returning invalid commands or attempting to cheat by casting the `ArenaWorld` to `World`, or casting other objects to specific implementations, will negate your submission for the the `Fox` and `Rabbit` AI implementations.
 
 #### The `World`
 
