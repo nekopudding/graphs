@@ -143,7 +143,7 @@ Note that the AI should only rely on the interface contracts of arena animals, b
 
 #### The `World`
 
-The `World` class is the core engine of the game. It tracks all items (and removes dead ones) and actors. The world regularly gets the next action for each actor and performs the actions. The world organizes items in a 2-dimensional grid ($n \times n$, for arbitrary $n$) of `Item`s, with the top left corner being (0; 0). Locations are represented by the `Location` class, which contains several potentially useful methods. We also provide a utility class with potentially useful functionality.
+The `World` class is the core engine of the game. It tracks all items (and removes dead ones) and actors. The world regularly gets the next action for each actor and performs the actions. The world organizes items in a 2-dimensional grid (`n x n`, for arbitrary ` n`) of `Item`s, with the top left corner being (0; 0). Locations are represented by the `Location` class, which contains several potentially useful methods. We also provide a utility class with potentially useful functionality.
 
 We provide a GUI to visualize the world with its items. The GUI has a simple interface containing two buttons: a <kbd>Step</kbd> to execute a single step; and a <kbd>Start/Stop</kbd> toggle button to run indefinitely until the toggle button is pressed again. For completing the machine problem, it is not necessary to understand the implementation of the GUI. To initialize the world with your items, modify the `Main` class. In the arena competition, we will initialize a large virtual world with grass and all competing rabbits and foxes.
 
