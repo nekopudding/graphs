@@ -34,7 +34,7 @@ _All your algorithms must work on directed graphs (digraphs)._
 + **Breadth first search (BFS)**: Implement the [breadth first search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm to traverse a graph.
 + **Depth first search (DFS)**: Implement the [depth first search](https://en.wikipedia.org/wiki/Depth-first_search) algorithm to traverse a graph.
 
-For both BFS and DFS above, you should use traverse the entire graph. You should return a set of lists (`Set<List<Vertex>>`). Each list in the set is a connected component of the graph. The vertices in each list are in the order they were visited by the traversal routines. More specifically, start a BFS or DFS traversal at every possible vertex and each such traversal will produce a list. The set of all these lists is what you want to return.
+For both BFS and DFS above, you should use traverse the entire graph. You should return a set of lists (`Set<List<Vertex>>`). Each list in the set is a connected component of the graph. The vertices in each list are in the order they were visited by the traversal routines. More specifically, start a BFS or DFS traversal at every possible vertex and each such traversal will produce a list. The set of all these lists is what you want to return. Furthermore, when deciding which vertex to visit next, you should select the vertex with the lexicographically smaller label. This approach ensures that there is exactly one list corresponding to a BFS or DFS starting at a given vertex.
 
 ### Task 3: Graph Algorithms 2
 
@@ -83,7 +83,7 @@ This is a creative task. Add at least **four** new subtypes of `Item` to the vir
 
 + `Animal`s: In the `animals` package create at least one additional animal type, such as lions, flies, and elephants.
 + `Vehicle`s: In the `vehicles` package create at least one vehicle, which can run over (destroy) everything with a lower strength but will crash (be destroyed) when running into something with a greater strength. Like real vehicles, your vehicles should build momentum when moving, so it takes time for them to accelerate or brake or turn; they can change directions only at low speed. Note that the speed of a `Vehicle` is controlled by the cool-down period.
-+ **Your own category**: In a separate package implement at least one subtype of `Item`. Examples might include tornadoes and earthquake, mountains and cliffs, even [Scarlet Witch](https://en.wikipedia.org/wiki/Scarlet_Witch), [Master Yoda](https://en.wikipedia.org/wiki/Yoda) or [Voldemort](https://en.wikipedia.org/wiki/Lord_Voldemort). _Use your imagination!_
++ **Your own category**: In a separate package implement at least one subtype of `Item`. Examples might include tornadoes and earthquakes, mountains and cliffs, even [Scarlet Witch](https://en.wikipedia.org/wiki/Scarlet_Witch), [Master Yoda](https://en.wikipedia.org/wiki/Yoda) or [Voldemort](https://en.wikipedia.org/wiki/Lord_Voldemort). _Use your imagination!_
 
 You have considerable freedom in this machine problem for which items you add and how your items behave. Your items might range from a simple stone to sophisticated characters and weapon systems, from real-world animals to science fiction creatures, or include technical objects.
 
