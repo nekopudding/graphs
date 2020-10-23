@@ -39,7 +39,10 @@ public class TwitterAnalysis {
             - The second should be one of "commonInfluencers" or "numRetweets".
             - The next two arguments should be identifiers for userA and userB.
             Then main() should invoke the appropriate method and write the result to
-            standard output (often, the terminal).
+            standard output (often, the terminal). For "numRetweets", the output to
+            standard output should be just the int. For "commonInfluencers", each
+            of the influencers should be written to standard output, one per line,
+            with no other text.
          */
     }
 
