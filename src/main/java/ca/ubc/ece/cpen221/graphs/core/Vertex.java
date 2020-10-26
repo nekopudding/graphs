@@ -20,16 +20,6 @@ public class Vertex<T> {
     }
 
     /**
-     * Create a new vertex with a label only.
-     * The label is the vertex content too.
-     *
-     * @param label with which to identify the vertex
-     */
-    public Vertex(String label) {
-        this.label = label;
-    }
-
-    /**
      * Obtain the label associated with a vertex
      *
      * @return label associated with this vertex
