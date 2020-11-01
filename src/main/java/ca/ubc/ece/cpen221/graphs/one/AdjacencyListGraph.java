@@ -15,9 +15,11 @@ import java.util.List;
  *
  *  Abstraction function: Represents a graph as a HashMap of Lists:
  *      Keys represent the vertices of the graph.
- *      Corresponding List contains all of the adjacent vertices to the key vertex.
+ *      Corresponding List contains all of the downstream vertices from the key vertex.
  *
- *  Representation Invariant:
+ *  Representation Invariant: There exists no vertex A in the graph HashMap such that
+ *  no other vertex contains A in its list AND vertex A does not contain any other vertex in
+ *  its own list.
  *
  ******************************************************************************/
 
@@ -52,12 +54,8 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      */
     public void addEdge(Vertex<T> v1, Vertex<T> v2){
         List<Vertex<T>> v1List = graph.get(v1);
-        List<Vertex<T>> v2List = graph.get(v2);
         v1List.add(v2);
-        v2List.add(v1);
-
         graph.put(v1, v1List);
-        graph.put(v2, v2List);
     }
 
     /**
@@ -67,13 +65,11 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      * </p>
      * <p>
      * Postcondition: return true iff an edge from v1 connects to v2
-     * AND an edge from v2 connects to v1.
      * </p>
      */
     public boolean edgeExists(Vertex<T> v1, Vertex<T> v2){
         List<Vertex<T>> v1List = graph.get(v1);
-        List<Vertex<T>> v2List = graph.get(v2);
-        if (v1List.contains(v2) && v2List.contains(v1)){
+        if (v1List.contains(v2)){
             return true;
         }
         return false;
