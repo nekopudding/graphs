@@ -3,6 +3,7 @@ package ca.ubc.ece.cpen221.graphs.one;
 import ca.ubc.ece.cpen221.graphs.core.Graph;
 import ca.ubc.ece.cpen221.graphs.core.Vertex;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -80,6 +81,37 @@ public class Algorithms {
     public static <T> int diameter(Graph<T> graph) {
         // TODO: Implement this method
         return -1; // this should be changed
+    }
+
+    /**
+     *
+     */
+    public static <T> List<Vertex<T>> upstreamVertices(Graph<T> graph, Vertex<T> a, Vertex<T> b){
+        List<Vertex<T>> commonVertices = new ArrayList<>();
+        List<Vertex<T>> allVertices = graph.getVertices();
+        for (Vertex<T> v : allVertices){
+            List<Vertex<T>> neighbours = graph.getNeighbors(v);
+            if (neighbours.contains(a) && neighbours.contains(b)){
+                commonVertices.add(v);
+            }
+        }
+        return commonVertices;
+    }
+
+    /**
+     *
+     */
+    public static <T> List<Vertex<T>> downstreamVertices(Graph<T> graph, Vertex<T> a, Vertex<T> b){
+        List<Vertex<T>> commonVertices = new ArrayList<>();
+        List<Vertex<T>> aNeighbours = graph.getNeighbors(a);
+        List<Vertex<T>> bNeighbours = graph.getNeighbors(b);
+
+        for (Vertex<T> v : aNeighbours){
+            if (bNeighbours.contains(v)){
+                commonVertices.add(v);
+            }
+        }
+        return commonVertices;
     }
 
 }
