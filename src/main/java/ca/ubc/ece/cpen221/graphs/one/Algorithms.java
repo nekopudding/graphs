@@ -84,6 +84,14 @@ public class Algorithms {
     }
 
     /**
+     * Returns a list containing all of the common upstream vertices of a and b.
+     *
+     * @param graph directed graph containing vertex a and vertex b.
+     * @param a : Vertex a. graph must contain a.
+     * @param b : Vertex b. graph must contain b.
+     *
+     * @return List<Vertex<T>> a list of vertices such that a and b are both neighbours for all
+     * vertices in the list. Returns an empty list if there are no such vertices.
      *
      */
     public static <T> List<Vertex<T>> upstreamVertices(Graph<T> graph, Vertex<T> a, Vertex<T> b){
@@ -99,7 +107,14 @@ public class Algorithms {
     }
 
     /**
+     *Returns a list containing all of the common downstream vertices of a and b.
      *
+     *@param graph directed graph containing vertex a and vertex b.
+     *@param a : Vertex a. graph must contain a.
+     *@param b : Vertex b. graph must contain b.
+     *
+     *@return List<Vertex<T>> a list of vertices v such that v is a neighbour of both a and b.
+     * returns an empty list if no such vertices exist.
      */
     public static <T> List<Vertex<T>> downstreamVertices(Graph<T> graph, Vertex<T> a, Vertex<T> b){
         List<Vertex<T>> commonVertices = new ArrayList<>();

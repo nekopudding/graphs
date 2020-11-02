@@ -41,6 +41,10 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      * <p>
      * Precondition: v is not already a vertex in the graph
      * </p>
+     *
+     * @param v vertex to be added to the graph. Must not already be in the graph.
+     *
+     * @return mutates HashMap by adding a key of vertex v and an empty arraylist as the value.
      */
     public void addVertex(Vertex<T> v){
         graph.put(v, new ArrayList<>());
@@ -51,6 +55,13 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      * <p>
      * Precondition: v1 and v2 are vertices in the graph
      * </p>
+     *
+     * @param v1 Vertex v1 that will be upstream neighbour of v2. Must be a vertex in the graph.
+     *
+     * @param v2 Vertex v2 that will be downstream neighbour of v1. Must be a vertex in the graph.
+     *
+     * @return mutates List<Vertex<T>> in the graph hashmap mapped
+     * to key v1 by adding v2 to the list.
      */
     public void addEdge(Vertex<T> v1, Vertex<T> v2){
         List<Vertex<T>> v1List = graph.get(v1);
@@ -66,6 +77,10 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      * <p>
      * Postcondition: return true iff an edge from v1 connects to v2
      * </p>
+     *
+     * @param v1 is upstream vertex. Must be in the graph.
+     * @param v2 is downstream vertex. Must be in the graph.
+     * @return true iff an edge from v1 connects to v2
      */
     public boolean edgeExists(Vertex<T> v1, Vertex<T> v2){
         List<Vertex<T>> v1List = graph.get(v1);
