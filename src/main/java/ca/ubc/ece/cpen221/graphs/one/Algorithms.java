@@ -52,9 +52,29 @@ public class Algorithms {
      * @return
      */
     public static <T> Set<List<Vertex<T>>> depthFirstSearch(Graph<T> graph) {
-        // TODO: Implement this method
-        return null; // this should be changed
+        Set<List<Vertex<T>>> dfsPath = new HashSet<List<Vertex<T>>>();
+        List<Vertex<T>> allVertices = new ArrayList<>();
+        allVertices = graph.getVertices();
+        for (Vertex<T> v : allVertices) {
+            List<Vertex<T>> dfsSubPath = new ArrayList<>();
+            dfsRecursive(v, dfsSubPath);
+            dfsPath.add(dfsSubPath);
+        }
+        return dfsPath;
 
+    }
+
+    public static <T> void dfsRecursive(Vertex<T> vertex, List<Vertex<T>> dfsSubPath) {
+        dfsSubPath.add(vertex);
+        List<Vertex<T>> neighbor = new ArrayList<>();
+        neighbor.sort(Comparator.comparing(Vertex::getLabel));
+        if (!neighbor.isEmpty()) {
+            for (Vertex<T> n : neighbor) {
+                if (!dfsSubPath.contains(n)) {
+                    dfsRecursive(n, dfsSubPath);
+                }
+            }
+        }
     }
 
     /**
