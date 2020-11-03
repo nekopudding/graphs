@@ -3,9 +3,7 @@ package ca.ubc.ece.cpen221.graphs.one;
 import ca.ubc.ece.cpen221.graphs.core.Graph;
 import ca.ubc.ece.cpen221.graphs.core.Vertex;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Algorithms {
 
@@ -79,15 +77,10 @@ public class Algorithms {
             return totDistance;
         }
         List<Vertex<T>> neighbors = graph.getNeighbors(start);
-        for (Vertex<T> v : remaining) {
-            //if of the remaining list is also a neighbor, call the function
-            for (Vertex<T> neighbor : neighbors) {
-                if (v == neighbor) {
-                    distance++;
-                    remainingList.remove(v);
-                    totDistance.addAll(computeDistance(graph, v, end, distance, remainingList));
-                    break;
-                }
+        for (Vertex<T> neighbor : neighbors) {
+            if (remaining.contains(neighbor)) {
+                remainingList.remove(neighbor);
+                totDistance.addAll(computeDistance(graph, neighbor, end, distance+1, remainingList));
             }
         }
 
