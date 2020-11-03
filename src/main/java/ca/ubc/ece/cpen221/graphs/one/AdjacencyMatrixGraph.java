@@ -134,6 +134,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         }
         return vertices;
     }
+
 }
 
 /*
@@ -142,4 +143,11 @@ Your tasks: distance and graph diameter
 
 Shortest distance: compute all possible paths to v2 from v1 then find the shortest one
 this requires there to be upstream vertices from v1
+
+recursive - get all ones from the start point, go to the ones on the second point excluding the
+start point
+
+remaining - the points we haven't visited
+
+if we reach the destination, add the distance to the list,
  */
