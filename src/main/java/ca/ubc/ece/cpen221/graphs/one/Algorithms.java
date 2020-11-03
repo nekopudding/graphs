@@ -25,8 +25,8 @@ public class Algorithms {
      *
      * Computes the shortest distance from vertex a to b on the graph
      * @param graph graph must contain vertices a and b
-     * @param a starting vertex
-     * @param b destination vertex
+     * @param a     starting vertex
+     * @param b     destination vertex
      * @return the shortest distance from a to b as an int
      */
     public static <T> int shortestDistance(Graph<T> graph, Vertex<T> a, Vertex<T> b) {
@@ -52,8 +52,8 @@ public class Algorithms {
     /**
      * Start the recursive function computing all distances from v1 to v2
      * @param graph the graph being used containing v1 and v2
-     * @param v1 v1 is in the graph, acts as the starting point
-     * @param v2 v2 is in the graph, acts as the end point
+     * @param v1    v1 is in the graph, acts as the starting point
+     * @param v2    v2 is in the graph, acts as the end point
      * @return the list of integers containing distances of all paths from v1 to v2
      */
     public static <T> List<Integer> startComputeDistance(Graph<T> graph, Vertex<T> v1, Vertex<T> v2) {
@@ -64,10 +64,11 @@ public class Algorithms {
 
     /**
      * Computes the distance from start point to end point recursively
-     * @param graph graph used to compute distance
-     * @param start starting point, must exist on the graph
-     * @param end destination, must exist on the graph
-     * @param distance current distance on the path
+     *
+     * @param graph     graph used to compute distance
+     * @param start     starting point, must exist on the graph
+     * @param end       destination, must exist on the graph
+     * @param distance  current distance on the path
      * @param remaining the remaining points on the graph that hasn't been visited
      * @return list containing the distance taken to reach the end
      */
@@ -104,8 +105,8 @@ public class Algorithms {
      * returned set should correspond to the number of graph
      * vertices).
      *
-     * @param
-     * @return
+     * @param graph to be traversed
+     * @return a set of lists that contains the vertices in a depth first search order, starting at every vertices.
      */
     public static <T> Set<List<Vertex<T>>> depthFirstSearch(Graph<T> graph) {
         Set<List<Vertex<T>>> dfsPath = new HashSet<List<Vertex<T>>>();
@@ -113,21 +114,28 @@ public class Algorithms {
         allVertices = graph.getVertices();
         for (Vertex<T> v : allVertices) {
             List<Vertex<T>> dfsSubPath = new ArrayList<>();
-            dfsRecursive(v, dfsSubPath);
+            dfsRecursive(v, dfsSubPath, graph);
             dfsPath.add(dfsSubPath);
         }
         return dfsPath;
 
     }
 
-    public static <T> void dfsRecursive(Vertex<T> vertex, List<Vertex<T>> dfsSubPath) {
+    /**
+     * Adds the current path to a list and moves to the next vertex with the lexicographically smaller label.
+     *
+     * @param graph      graph that contains all the vertices and edges
+     * @param vertex     the current node
+     * @param dfsSubPath the current path traversed, and to be added upon
+     */
+    public static <T> void dfsRecursive(Vertex<T> vertex, List<Vertex<T>> dfsSubPath, Graph<T> graph) {
         dfsSubPath.add(vertex);
-        List<Vertex<T>> neighbor = new ArrayList<>();
+        List<Vertex<T>> neighbor = new ArrayList<>(graph.getNeighbors(vertex));
         neighbor.sort(Comparator.comparing(Vertex::getLabel));
         if (!neighbor.isEmpty()) {
             for (Vertex<T> n : neighbor) {
                 if (!dfsSubPath.contains(n)) {
-                    dfsRecursive(n, dfsSubPath);
+                    dfsRecursive(n, dfsSubPath, graph);
                 }
             }
         }
@@ -143,12 +151,33 @@ public class Algorithms {
      * returned set should correspond to the number of graph
      * vertices).
      *
-     * @param
-     * @return
+     * @param graph to be traversed
+     * @return a set of lists that contains the vertices in a breadth first search order, starting at every vertices.
      */
     public static <T> Set<List<Vertex<T>>> breadthFirstSearch(Graph<T> graph) {
-        // TODO: Implement this method
-        return null; // this should be changed
+        Set<List<Vertex<T>>> bfsPath = new HashSet<List<Vertex<T>>>();
+        List<Vertex<T>> allVertices = new ArrayList<>();
+        allVertices = graph.getVertices();
+        for (Vertex<T> v : allVertices) {
+            List<Vertex<T>> bfsSubPath = new ArrayList<>();
+            List<Vertex<T>> queue = new ArrayList<>();
+            queue.add(v);
+            while (!queue.isEmpty()) {
+                bfsSubPath.add(queue.get(0));
+                List<Vertex<T>> neighbor = new ArrayList<>(graph.getNeighbors(queue.get(0)));
+                neighbor.sort(Comparator.comparing(Vertex::getLabel));
+                queue.remove(0);
+                if (!neighbor.isEmpty()) {
+                    for (Vertex<T> n : neighbor) {
+                        if (!bfsSubPath.contains(n) && !queue.contains(n)) {
+                            queue.add(n);
+                        }
+                    }
+                }
+            }
+            bfsPath.add(bfsSubPath);
+        }
+        return bfsPath;
     }
 
     /**
