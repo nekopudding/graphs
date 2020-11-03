@@ -35,6 +35,7 @@ public class Algorithms {
         // when the graph contains vertices of type Vertex<String>.
         // The compiler can also perform type inference so that we can simply use:
         //      Algorithms.shortestDistance(g, a, b)
+
         return 0;
     }
 
