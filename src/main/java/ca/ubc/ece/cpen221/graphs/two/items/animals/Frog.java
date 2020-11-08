@@ -97,7 +97,7 @@ public class Frog implements ArenaAnimal {
 
     @Override
     public int getMovingRange() {
-        return 1; // Can only move to adjacent locations.
+        return 2; // Can only move to adjacent locations.
     }
 
     @Override
