@@ -36,4 +36,23 @@ public interface Vehicle extends MoveableItem, Actor {
      *
      */
     boolean changeDirection(Direction dir);
+
+    /**
+     * getter method to get the vehicle's current direction.
+     * @return Direction object.
+     */
+    Direction getDirection();
+
+    /**
+     * getter method to get the vehicle's minimum cooldown.
+     * @return int representing this.MINIMUM_COOLDOWN
+     */
+    int getMinCooldown();
+
+    /**
+     * getter method to get the vehicle's deceleration.
+     * @return int representing this.DECELERATION
+     */
+    int getDeceleration();
+
 }

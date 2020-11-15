@@ -20,10 +20,9 @@ public abstract class AbstractVehicle implements Vehicle{
     private int MIN_COOLDOWN;
     private int MAX_COOLDOWN;
     private ImageIcon image;
-    private boolean isDead;
     private int ACCELERATION;
     private int BRAKING;
-    private int MAX_TURN_SPEED;
+    private int MIN_TURN_COOLDOWN;
 
     private VehicleAI ai;
 
@@ -49,4 +48,9 @@ public abstract class AbstractVehicle implements Vehicle{
         return 0;
     }
 
+    @Override
+    public int getMinCooldown(){ return this.MIN_COOLDOWN; }
+
+    @Override
+    public int getDeceleration(){ return this.BRAKING; }
 }
