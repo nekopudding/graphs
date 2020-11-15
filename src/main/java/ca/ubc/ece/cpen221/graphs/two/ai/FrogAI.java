@@ -4,6 +4,7 @@ import ca.ubc.ece.cpen221.graphs.core.Graph;
 import ca.ubc.ece.cpen221.graphs.one.AdjacencyListGraph;
 import ca.ubc.ece.cpen221.graphs.two.ArenaWorld;
 import ca.ubc.ece.cpen221.graphs.two.Location;
+import ca.ubc.ece.cpen221.graphs.two.Util;
 import ca.ubc.ece.cpen221.graphs.two.commands.BreedCommand;
 import ca.ubc.ece.cpen221.graphs.two.commands.Command;
 import ca.ubc.ece.cpen221.graphs.two.commands.MoveCommand;
@@ -12,8 +13,9 @@ import ca.ubc.ece.cpen221.graphs.two.commands.WaitCommand;
 import ca.ubc.ece.cpen221.graphs.two.items.Item;
 import ca.ubc.ece.cpen221.graphs.two.items.animals.ArenaAnimal;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
+
 
 import static ca.ubc.ece.cpen221.graphs.two.Direction.*;
 
@@ -32,8 +34,8 @@ public class FrogAI extends AbstractAI {
     public Command getNextAction(ArenaWorld world, ArenaAnimal animal) {
         Location pos = animal.getLocation();
         Set<Item> nearby = world.searchSurroundings(animal);
-        Set<Location> nearbyLoc = new TreeSet<>();
-        Set<Item> nearbyGnats = new TreeSet<>();
+        Set<Location> nearbyLoc = new HashSet<>();
+        Set<Item> nearbyGnats = new HashSet<>();
         for (Item nearbyItems : nearby) {
             nearbyLoc.add(nearbyItems.getLocation());
             if (nearbyItems.getName().equals("Gnat")){
@@ -42,19 +44,19 @@ public class FrogAI extends AbstractAI {
         }
         if (animal.getEnergy() > animal.getMinimumBreedingEnergy()) {
             Location n = new Location(pos, NORTH);
-            if (!nearbyLoc.contains(n)) {
+            if (!nearbyLoc.contains(n) && isValidLoc(n,world)) {
                 return new BreedCommand(animal, n);
             }
             Location e = new Location(pos, EAST);
-            if (!nearbyLoc.contains(e)) {
+            if (!nearbyLoc.contains(e) && isValidLoc(n,world)) {
                 return new BreedCommand(animal, e);
             }
             Location s = new Location(pos, SOUTH);
-            if (!nearbyLoc.contains(s)) {
+            if (!nearbyLoc.contains(s) && isValidLoc(n,world)) {
                 return new BreedCommand(animal, s);
             }
             Location w = new Location(pos, WEST);
-            if (!nearbyLoc.contains(s)) {
+            if (!nearbyLoc.contains(s) && isValidLoc(n,world)) {
                 return new BreedCommand(animal, w);
             }
         }
@@ -64,7 +66,11 @@ public class FrogAI extends AbstractAI {
         }
         if (!nearbyGnats.isEmpty()){
             Item nearestGnat = getNearestGnat(animal, nearbyGnats);
-            return runTowards (nearestGnat, animal);
+            return runTowards (nearestGnat, animal, nearby, world);
+        }
+        Location wander = new Location(pos, Util.getRandomDirection());
+        if (!containsItem(wander, nearby) && isValidLoc(wander, world)){
+            return new MoveCommand(animal, wander);
         }
         return new WaitCommand();
     }
@@ -76,7 +82,7 @@ public class FrogAI extends AbstractAI {
      * @return
      */
     private Set<Item> edibleGnats (ArenaAnimal animal, Set<Item> gnats){
-        Set<Item> closeGnats = new TreeSet<>();
+        Set<Item> closeGnats = new HashSet<>();
         for (Item gnat : gnats){
             if (animal.getLocation().getDistance(gnat.getLocation()) <= 2){
                 closeGnats.add(gnat);
@@ -109,7 +115,7 @@ public class FrogAI extends AbstractAI {
      * @param animal
      * @return
      */
-    private Command runTowards(Item prey, ArenaAnimal animal){
+    private Command runTowards(Item prey, ArenaAnimal animal, Set<Item> nearby, ArenaWorld world){
         Location preyLoc = prey.getLocation();
         Location currLoc = animal.getLocation();
         Location targetLoc;
@@ -117,9 +123,18 @@ public class FrogAI extends AbstractAI {
         int yDist = Math.abs(currLoc.getY() - preyLoc.getY());
         if (xDist > yDist){
           targetLoc = moveHoriz(currLoc, preyLoc);
+          if (containsItem(targetLoc, nearby)){
+              targetLoc = moveVert(currLoc,preyLoc);
+          }
         }
         else{
             targetLoc = moveVert(currLoc,preyLoc);
+            if (containsItem(targetLoc, nearby)){
+                targetLoc = moveHoriz(currLoc,preyLoc);
+            }
+        }
+        if (containsItem(targetLoc, nearby) || !isValidLoc(targetLoc, world)){
+            return new WaitCommand();
         }
         return new MoveCommand(animal, targetLoc);
     }
@@ -128,7 +143,9 @@ public class FrogAI extends AbstractAI {
      *
      * @param currLoc
      * @param prey
-     * @return
+     * @return Location object that represents the ideal adjacent location for the frog to move
+     * such that it approaches a gnat and the frog moves horizontally.
+     * If that location already has an item, returns vertical movement location.
      */
     private Location moveHoriz(Location currLoc, Location prey){
         Location targetLoc;
@@ -156,6 +173,37 @@ public class FrogAI extends AbstractAI {
             targetLoc = new Location(currLoc, NORTH);
         }
         return targetLoc;
+    }
+
+    /**
+     *
+     * @param loc
+     * @param nearby
+     * @return
+     */
+    private boolean containsItem(Location loc, Set<Item> nearby){
+        for (Item i : nearby){
+            if (i.getLocation().equals(loc)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValidLoc(Location loc, ArenaWorld world){
+        if (loc.getX() >= world.getWidth()){
+            return false;
+        }
+        if (loc.getX() < 0){
+            return false;
+        }
+        if (loc.getY() >= world.getHeight()){
+            return false;
+        }
+        if (loc.getY() < 0){
+            return false;
+        }
+        return true;
     }
 
 }
