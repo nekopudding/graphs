@@ -14,15 +14,13 @@ import static ca.ubc.ece.cpen221.graphs.two.Direction.NORTH;
 
 public class SUV extends AbstractVehicle{
     private final int INITIAL_ENERGY = 100;
-    private final int MAX_ENERGY = 100;
     private final int INITIAL_COOLDOWN = 6;
     private final int MIN_COOLDOWN = 1;
     private final int MAX_COOLDOWN = 10;
-    private final ImageIcon SUVImage = Util.loadImage("unknown.gif");
-    private boolean isDead = false;
+    private final ImageIcon SUVImage = Util.loadImage("trucks.gif");
     private final int ACCELERATION = 1;
     private final int BRAKING = 2;
-    private final int MAX_TURN_SPEED = 4;
+    private final int MIN_TURN_COOLDOWN = 4;
     private final int MASS = 400;
 
     private VehicleAI ai;
@@ -37,6 +35,9 @@ public class SUV extends AbstractVehicle{
         this.location = loc;
         this.direction = start;
         this.ai = vehai;
+        energy = INITIAL_ENERGY;
+        cooldown = INITIAL_COOLDOWN;
+        strength = MASS * 1.0 / cooldown;
     }
 
     public String getName(){ return "SUV"; }
@@ -55,7 +56,7 @@ public class SUV extends AbstractVehicle{
     }
 
     @Override
-    public int getTurnSpeed(){ return this.MAX_TURN_SPEED; }
+    public int getTurnSpeed(){ return this.MIN_TURN_COOLDOWN; }
 
     @Override
     public boolean changeDirection(Direction dir){
@@ -101,5 +102,14 @@ public class SUV extends AbstractVehicle{
     public int getStrength(){ return (int)strength; }
 
     @Override
-    public boolean isDead() { return isDead; }
+    public boolean isDead() { return energy <= 0; }
+
+    @Override
+    public Direction getDirection() { return this.direction; }
+
+    @Override
+    public void loseEnergy(int energyLoss) {
+        this.energy = this.energy - energyLoss;
+    }
+
 }

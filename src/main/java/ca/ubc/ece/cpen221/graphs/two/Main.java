@@ -1,5 +1,6 @@
 package ca.ubc.ece.cpen221.graphs.two;
 
+import ca.ubc.ece.cpen221.graphs.two.ai.DriverAI;
 import ca.ubc.ece.cpen221.graphs.two.ai.FoxAI;
 import ca.ubc.ece.cpen221.graphs.two.ai.RabbitAI;
 import ca.ubc.ece.cpen221.graphs.two.core.WorldImpl;
@@ -9,6 +10,9 @@ import ca.ubc.ece.cpen221.graphs.two.items.Grass;
 import ca.ubc.ece.cpen221.graphs.two.items.animals.Fox;
 import ca.ubc.ece.cpen221.graphs.two.items.animals.Gnat;
 import ca.ubc.ece.cpen221.graphs.two.items.animals.Rabbit;
+import ca.ubc.ece.cpen221.graphs.two.items.vehicles.SUV;
+import ca.ubc.ece.cpen221.graphs.two.items.vehicles.Vehicle;
+import ca.ubc.ece.cpen221.graphs.two.items.vehicles.lawnmower;
 
 import javax.swing.SwingUtilities;
 
@@ -36,6 +40,8 @@ public class Main {
     static final int INITIAL_MEN = INITIAL_GRASS / 150;
     static final int INITIAL_WOMEN = INITIAL_GRASS / 100;
     static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
+    static final int INITIAL_SUVS = 10;
+    static final int INITIAL_LAWNMOWERS = 1;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -59,6 +65,8 @@ public class Main {
         addGnats(world);
         addRabbits(world);
         addFoxes(world);
+        addSUVS(world);
+        addLawnmowers(world);
         // TODO: You may add your own creatures here!
     }
 
@@ -95,6 +103,27 @@ public class Main {
             Rabbit rabbit = new Rabbit(rabbitAI, loc);
             world.addItem(rabbit);
             world.addActor(rabbit);
+        }
+    }
+
+    private void addSUVS(World world) {
+        DriverAI dai = new DriverAI();
+        for (int i = 0; i < INITIAL_SUVS; i++){
+            Location loc = Util.getRandomEmptyLocation(world);
+            Direction dir = Util.getRandomDirection();
+            SUV suv = new SUV(loc,dir,dai);
+            world.addItem(suv);
+            world.addActor(suv);
+        }
+    }
+
+    private void addLawnmowers(World world) {
+        for (int i = 0; i < INITIAL_LAWNMOWERS; i++){
+            Location loc = Util.getRandomEmptyLocation(world);
+            Direction dir = Util.getRandomDirection();
+            Vehicle v = new lawnmower(loc,dir);
+            world.addItem(v);
+            world.addActor(v);
         }
     }
 }
