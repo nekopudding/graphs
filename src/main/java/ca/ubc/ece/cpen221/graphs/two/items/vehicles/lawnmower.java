@@ -65,7 +65,6 @@ public class lawnmower extends AbstractVehicle{
         if (this.direction.equals(dir)){
             return false;
         }
-
         switch (this.direction){
             case NORTH: if (dir == SOUTH) { return false; }
             case EAST: if (dir == WEST) { return false; }

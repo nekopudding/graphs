@@ -14,7 +14,7 @@ import java.util.Random;
 public final class Util {
 
     // Use a fixed seed so that simulations are repeatable.
-    public static final Random RAND = new Random(201378);
+    public static final Random RAND = new Random(5555);
 
     private Util() {
         // This class should not be instantiated.

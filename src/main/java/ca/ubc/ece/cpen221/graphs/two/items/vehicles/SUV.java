@@ -21,7 +21,7 @@ public class SUV extends AbstractVehicle{
     private final int ACCELERATION = 1;
     private final int BRAKING = 2;
     private final int MIN_TURN_COOLDOWN = 4;
-    private final int MASS = 400;
+    private final int MASS = 900;
 
     private VehicleAI ai;
 
@@ -60,15 +60,20 @@ public class SUV extends AbstractVehicle{
 
     @Override
     public boolean changeDirection(Direction dir){
-        if (this.direction.equals(dir)){
+        if (this.direction == dir){
             return false;
         }
-
-        switch (this.direction){
-            case NORTH: if (dir == SOUTH) { return false; }
-            case EAST: if (dir == WEST) { return false; }
-            case WEST: if (dir == EAST) { return false; }
-            case SOUTH: if (dir == NORTH) { return false; }
+        if (this.direction == NORTH && dir == SOUTH){
+            return false;
+        }
+        if (this.direction == EAST && dir == WEST){
+            return false;
+        }
+        if (this.direction == WEST && dir == EAST){
+            return false;
+        }
+        if (this.direction == SOUTH && dir == NORTH){
+            return false;
         }
         this.direction = dir;
         return true;

@@ -40,8 +40,8 @@ public class Main {
     static final int INITIAL_MEN = INITIAL_GRASS / 150;
     static final int INITIAL_WOMEN = INITIAL_GRASS / 100;
     static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
-    static final int INITIAL_SUVS = 10;
-    static final int INITIAL_LAWNMOWERS = 1;
+    static final int INITIAL_SUVS = 8;
+    static final int INITIAL_LAWNMOWERS = 10;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -121,7 +121,7 @@ public class Main {
         for (int i = 0; i < INITIAL_LAWNMOWERS; i++){
             Location loc = Util.getRandomEmptyLocation(world);
             Direction dir = Util.getRandomDirection();
-            Vehicle v = new lawnmower(loc,dir);
+            Vehicle v = new lawnmower(loc, dir);
             world.addItem(v);
             world.addActor(v);
         }
