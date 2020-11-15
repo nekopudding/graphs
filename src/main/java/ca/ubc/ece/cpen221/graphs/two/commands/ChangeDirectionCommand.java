@@ -54,10 +54,6 @@ public final class ChangeDirectionCommand implements Command {
             }
 
         }
-        else{
-            item.changeDirection(targetDirection);
-        }
-
     }
 }
 
