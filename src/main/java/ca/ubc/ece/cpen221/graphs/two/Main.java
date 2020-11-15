@@ -2,12 +2,16 @@ package ca.ubc.ece.cpen221.graphs.two;
 
 import ca.ubc.ece.cpen221.graphs.two.ai.DriverAI;
 import ca.ubc.ece.cpen221.graphs.two.ai.FoxAI;
+import ca.ubc.ece.cpen221.graphs.two.ai.FrogAI;
 import ca.ubc.ece.cpen221.graphs.two.ai.RabbitAI;
 import ca.ubc.ece.cpen221.graphs.two.core.WorldImpl;
 import ca.ubc.ece.cpen221.graphs.two.core.WorldUI;
 import ca.ubc.ece.cpen221.graphs.two.items.Gardener;
 import ca.ubc.ece.cpen221.graphs.two.items.Grass;
+import ca.ubc.ece.cpen221.graphs.two.items.Item;
+import ca.ubc.ece.cpen221.graphs.two.items.RoadSpike;
 import ca.ubc.ece.cpen221.graphs.two.items.animals.Fox;
+import ca.ubc.ece.cpen221.graphs.two.items.animals.Frog;
 import ca.ubc.ece.cpen221.graphs.two.items.animals.Gnat;
 import ca.ubc.ece.cpen221.graphs.two.items.animals.Rabbit;
 import ca.ubc.ece.cpen221.graphs.two.items.vehicles.SUV;
@@ -31,6 +35,7 @@ public class Main {
     static final int INITIAL_GNATS = INITIAL_GRASS / 4;
     static final int INITIAL_RABBITS = INITIAL_GRASS / 4;
     static final int INITIAL_FOXES = INITIAL_GRASS / 32;
+    static final int INITIAL_FROGS = 1; //INITIAL_GNATS / 8;
     static final int INITIAL_TIGERS = INITIAL_GRASS / 32;
     static final int INITIAL_BEARS = INITIAL_GRASS / 40;
     static final int INITIAL_HYENAS = INITIAL_GRASS / 32;
@@ -41,7 +46,8 @@ public class Main {
     static final int INITIAL_WOMEN = INITIAL_GRASS / 100;
     static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
     static final int INITIAL_SUVS = 8;
-    static final int INITIAL_LAWNMOWERS = 10;
+    static final int INITIAL_LAWNMOWERS = 0;
+    static final int INITIAL_SPIKES = 10;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -67,6 +73,8 @@ public class Main {
         addFoxes(world);
         addSUVS(world);
         addLawnmowers(world);
+        addFrogs(world);
+        addRoadSpikes(world);
         // TODO: You may add your own creatures here!
     }
 
@@ -106,6 +114,17 @@ public class Main {
         }
     }
 
+    private void addFrogs(World world) {
+        FrogAI frogAI = new FrogAI();
+        for (int i = 0; i < INITIAL_FROGS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Frog frog = new Frog(frogAI, loc);
+            world.addItem(frog);
+            world.addActor(frog);
+        }
+    }
+
+
     private void addSUVS(World world) {
         DriverAI dai = new DriverAI();
         for (int i = 0; i < INITIAL_SUVS; i++){
@@ -124,6 +143,14 @@ public class Main {
             Vehicle v = new lawnmower(loc, dir);
             world.addItem(v);
             world.addActor(v);
+        }
+    }
+
+    private void addRoadSpikes(World world){
+        for (int i = 0; i < INITIAL_SPIKES; i++){
+            Location loc = Util.getRandomEmptyLocation(world);
+            Item s = new RoadSpike(loc);
+            world.addItem(s);
         }
     }
 }
