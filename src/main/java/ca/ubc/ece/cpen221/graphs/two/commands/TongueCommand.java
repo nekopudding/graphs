@@ -15,10 +15,9 @@ public final class TongueCommand implements Command {
     private final Item food;
 
     /**
-     * Construct a {@link EatCommand}, where <code> item </code> is the eater
-     * and <code> food </code> is the food. Remember that the food must be
-     * adjacent to the eater, and the eater must have greater strength than the
-     * food.
+     * Construct a {@link TongueCommand}, where <code> item </code> is the tonguer
+     * and <code> food </code> is the food. The food must have a distance of less than or equal
+     * to 2 for the item to be able to grab the food with its tongue.
      *
      * @param item the eater
      * @param food : the food

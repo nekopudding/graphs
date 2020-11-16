@@ -38,6 +38,21 @@ public class DriverAI implements VehicleAI {
         return new AccelerateCommand(vehicle, targetLoc);
     }
 
+    /**
+     * Helper method that takes four distances, and returns the direction that corresponds with
+     * the shortest direction.
+     * @param n int that represents the distance of the item to the north border (y = 0).
+     *         Must be greater than 0 and less than world height.
+     * @param s int that represents the distance of the item to the south border (y = world height).
+     *         Must be greater than 0 and less than world height.
+     * @param w int that represents the distance of the item to the west border (x = 0).
+     *          Must be greater than 0 and less than world width.
+     * @param e int that represents the distance of the item to the east border (x = world width).
+     *          Must be greater than 0 and less than world width.
+     * @return NORTH iff n is the smallest distance. SOUTH iff s is the smallest distance.
+     * WEST iff w is the smallest distance. EAST iff e is the smallest distance. In case of a tie,
+     * the priority in descending order is NORTH, SOUTH, WEST, EAST.
+     */
     private Direction smallestDirection(int n, int s, int w, int e){
         List<Integer> sorter = new ArrayList<>();
         sorter.add(n);

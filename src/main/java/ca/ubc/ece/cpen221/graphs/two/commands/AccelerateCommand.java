@@ -25,7 +25,8 @@ public final class AccelerateCommand implements Command {
      * and valid. If the target location is outside the range of the world, the item is
      * killed. If there is another item in the target location, either that item or this item
      * will be destroyed, depending on their strengths. In the case of equal strengths, both items
-     * are destroyed.
+     * are destroyed. The vehicle will also have its cooldown decreased by the vehicle's
+     * acceleration rate.
      *
      * @param item           the Item that is moving
      * @param targetLocation the location that Item is moving to

@@ -19,7 +19,8 @@ public class RoadSpike implements Item {
      * Plant a roadspike at <code> location </code>. The location must be valid and
      * empty
      *
-     * @param location : the location where this grass will be created
+     * @param location : the location where the roadspike will be created. Location must be within
+     *                 the world, and must not contain another item.
      */
     public RoadSpike(Location location) {
         this.location = location;
