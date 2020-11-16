@@ -24,11 +24,19 @@ import static ca.ubc.ece.cpen221.graphs.two.Direction.*;
  * Your Frog AI.
  */
 public class FrogAI extends AbstractAI {
+
+    public FrogAI() {
+
+    }
     /**
      *
      * @param world
      * @param animal
-     * @return
+     * @return new BreedCommand() at an empty location (prioritize n,e,s,w) if frog has enough
+     * energy. If not, new TongueCommand() at first Gnat found within two blocks of frog. If no such
+     * gnats exist, new MoveCommand() towards first Gnat found within frog's vision range. If no
+     * such gnats are around, generates a random MoveCommand() if random MoveCommand() is valid,
+     * returns that MoveCommand. If not, returns WaitCommand().
      */
     @Override
     public Command getNextAction(ArenaWorld world, ArenaAnimal animal) {
@@ -75,11 +83,13 @@ public class FrogAI extends AbstractAI {
         return new WaitCommand();
     }
 
-    /**
+    /** Scans visible gnats from frog's position, and finds which ones are close enough to be
+     * grabbed by the frog's tongue (distance less than or equal to 2).
      *
-     * @param animal
-     * @param gnats
-     * @return
+     * @param animal The frog that wants to eat the gnats.
+     * @param gnats The set of items that the frog can see. Every item must be a gnat.
+     * @return Set of items such that every item i is a Gnat, and is within the frog's tongue
+     * distance (2).
      */
     private Set<Item> edibleGnats (ArenaAnimal animal, Set<Item> gnats){
         Set<Item> closeGnats = new HashSet<>();
@@ -92,10 +102,12 @@ public class FrogAI extends AbstractAI {
     }
 
     /**
+     * Out of all visible gnats, this helper method will return the nearest one.
      *
-     * @param animal
-     * @param gnats
-     * @return
+     * @param animal the Frog that sees/eats the gnats.
+     * @param gnats The set of items that the frog can see. Every item must be a gnat.
+     * @return Item that represents the gnat which is nearest to the animal. If there is a tie,
+     *       will return the one found first.
      */
     private Item getNearestGnat(ArenaAnimal animal, Set<Item> gnats){
         int minDist = Integer.MAX_VALUE;
@@ -110,10 +122,13 @@ public class FrogAI extends AbstractAI {
     }
 
     /**
+     * Helper method to find the correct location that the frog should move to.
      *
-     * @param prey
-     * @param animal
-     * @return
+     * @param prey Prey item that the frog is chasing. Must be in the world.
+     * @param animal Frog that has this FrogAI.
+     * @return MoveCommand() such that the location is i) valid ii) does not contain another item
+     * iii) decreases the distance between animal and prey. If no such location exists, returns
+     * a WaitCommand().
      */
     private Command runTowards(Item prey, ArenaAnimal animal, Set<Item> nearby, ArenaWorld world){
         Location preyLoc = prey.getLocation();
@@ -140,12 +155,11 @@ public class FrogAI extends AbstractAI {
     }
 
     /**
-     *
+     * Helper method to find if the frog should move west or east.
      * @param currLoc
      * @param prey
      * @return Location object that represents the ideal adjacent location for the frog to move
      * such that it approaches a gnat and the frog moves horizontally.
-     * If that location already has an item, returns vertical movement location.
      */
     private Location moveHoriz(Location currLoc, Location prey){
         Location targetLoc;
@@ -159,10 +173,11 @@ public class FrogAI extends AbstractAI {
     }
 
     /**
-     *
+     * Helper method to find if the frog should move north or south.
      * @param currLoc
      * @param prey
-     * @return
+     * @return Location object that represents the ideal adjacent location for the frog to move
+     * such that it approaches a gnat and the frog moves vertically.
      */
     private Location moveVert(Location currLoc, Location prey){
         Location targetLoc;
@@ -176,10 +191,12 @@ public class FrogAI extends AbstractAI {
     }
 
     /**
-     *
-     * @param loc
-     * @param nearby
-     * @return
+     * Helper method that checks if specified location has any other items already on it.
+     * @param loc the Location to be checked. Must be within the World.
+     * @param nearby the Set of Items such that it contains all Items within the Frog's vision
+     *               range.
+     * @return false iff there is no Item i such that i.getLocation() returns the same Location as
+     * loc. true if otherwise.
      */
     private boolean containsItem(Location loc, Set<Item> nearby){
         for (Item i : nearby){
@@ -190,6 +207,13 @@ public class FrogAI extends AbstractAI {
         return false;
     }
 
+    /**
+     *  Helper method that checks if specified location is within the world's borders.
+     * @param loc the Location to be checked.
+     * @param world the ArenaWorld that the Frog who has this FrogAI lives in.
+     * @return true iff loc.getX() is greater than or equal to 0 and less than world.getWidth()
+     * AND loc.getY() is greater than or equal to 0 and less than world.getHeight().
+     */
     private boolean isValidLoc(Location loc, ArenaWorld world){
         if (loc.getX() >= world.getWidth()){
             return false;
