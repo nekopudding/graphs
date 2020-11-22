@@ -2,6 +2,7 @@ package ca.ubc.ece.cpen221.graphs;
 
 import ca.ubc.ece.cpen221.graphs.core.Graph;
 import ca.ubc.ece.cpen221.graphs.core.Vertex;
+import ca.ubc.ece.cpen221.graphs.one.AdjacencyListGraph;
 import ca.ubc.ece.cpen221.graphs.one.AdjacencyMatrixGraph;
 import ca.ubc.ece.cpen221.graphs.one.Algorithms;
 
@@ -145,5 +146,86 @@ public class Tests {
         Set<List<Vertex<Integer>>> expected = new HashSet<>();
         assertEquals(expected, breadthFirstSearch(g));
     }
+
+    @Test
+    public void test_downstreamVertices() {
+        Graph<Integer> list = new AdjacencyListGraph<>();
+        Vertex<Integer> a = new Vertex<>("eight", 8);
+        list.addVertex(a);
+        Vertex<Integer> b = new Vertex<>("ten", 10);
+        list.addVertex(b);
+        Vertex<Integer> c = new Vertex<>("two", 2);
+        list.addVertex(c);
+        Vertex<Integer> d = new Vertex<>("five", 5);
+        list.addVertex(d);
+        Vertex<Integer> e = new Vertex<>("six", 6);
+        list.addVertex(e);
+        Vertex<Integer> f = new Vertex<>("one", 1);
+        list.addVertex(f);
+        Vertex<Integer> g = new Vertex<>("nine", 9);
+        list.addVertex(g);
+        Vertex<Integer> h = new Vertex<>("thirty", 30);
+        list.addVertex(h);
+
+        list.addEdge(a,b);
+        list.addEdge(b,c);
+        list.addEdge(d,b);
+        list.addEdge(a,e);
+        list.addEdge(b,f);
+        list.addEdge(e,f);
+        list.addEdge(f,g);
+        list.addEdge(c,g);
+        list.addEdge(c,h);
+        list.addEdge(f,h);
+
+        List<Vertex<Integer>> be = new ArrayList<>();
+        be.add(f);
+        assertEquals(be, Algorithms.downstreamVertices(list,b,e));
+        List<Vertex<Integer>> cf = new ArrayList<>();
+        cf.add(g);
+        cf.add(h);
+        assertEquals(cf, Algorithms.downstreamVertices(list,c,f));
+        assertEquals(new ArrayList<>(), Algorithms.downstreamVertices(list,a,c));
+    }
+
+    @Test
+    public void test_upstreamVertices() {
+        Graph<Integer> list = new AdjacencyListGraph<>();
+        Vertex<Integer> a = new Vertex<>("eight", 8);
+        list.addVertex(a);
+        Vertex<Integer> b = new Vertex<>("ten", 10);
+        list.addVertex(b);
+        Vertex<Integer> c = new Vertex<>("two", 2);
+        list.addVertex(c);
+        Vertex<Integer> d = new Vertex<>("five", 5);
+        list.addVertex(d);
+        Vertex<Integer> e = new Vertex<>("six", 6);
+        list.addVertex(e);
+        Vertex<Integer> f = new Vertex<>("one", 1);
+        list.addVertex(f);
+        Vertex<Integer> g = new Vertex<>("nine", 9);
+        list.addVertex(g);
+        Vertex<Integer> h = new Vertex<>("thirty", 30);
+        list.addVertex(h);
+
+        list.addEdge(a,b);
+        list.addEdge(b,c);
+        list.addEdge(d,b);
+        list.addEdge(a,e);
+        list.addEdge(b,f);
+        list.addEdge(e,f);
+        list.addEdge(f,g);
+        list.addEdge(c,g);
+        list.addEdge(c,h);
+        list.addEdge(f,h);
+
+
+        List<Vertex<Integer>> gh = new ArrayList<>();
+        gh.add(f);
+        gh.add(c);
+        assertEquals(gh, Algorithms.upstreamVertices(list,g,h));
+        assertEquals(new ArrayList<>(), Algorithms.upstreamVertices(list,a,c));
+    }
+
 
 }
