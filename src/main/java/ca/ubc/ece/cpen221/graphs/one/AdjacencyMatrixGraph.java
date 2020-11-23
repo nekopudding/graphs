@@ -18,8 +18,10 @@ import java.util.List;
  *
  *      Each vertex is mapped to an index value in the matrix.
  *
- *  Representation Invariant: the value of vertices must all be different, as such each
- *      vertex mapping to an index is a 1:1 ratio
+ *  Representation Invariant: the value of vertices must all be different
+ *      so that each key on the vertexMap has its own separate index value.
+ *      numVertices >= 0 at all times, representing the total amount of vertices that
+ *      exists on the graph
  *
  ******************************************************************************/
 
