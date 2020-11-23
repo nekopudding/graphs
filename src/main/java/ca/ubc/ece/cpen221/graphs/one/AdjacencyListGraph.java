@@ -4,6 +4,8 @@ import ca.ubc.ece.cpen221.graphs.core.Graph;
 import ca.ubc.ece.cpen221.graphs.core.Vertex;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,9 +40,6 @@ public class AdjacencyListGraph<T> implements Graph<T> {
     }
     /**
      * Adds a vertex to the graph.
-     * <p>
-     * Precondition: v is not already a vertex in the graph
-     * </p>
      *
      * @param v vertex to be added to the graph. Must not already be in the graph.
      *
@@ -51,11 +50,6 @@ public class AdjacencyListGraph<T> implements Graph<T> {
     }
 
     /**
-     * Adds an edge from v1 to v2.
-     * <p>
-     * Precondition: v1 and v2 are vertices in the graph
-     * </p>
-     *
      * @param v1 Vertex v1 that will be upstream neighbour of v2. Must be a vertex in the graph.
      *
      * @param v2 Vertex v2 that will be downstream neighbour of v1. Must be a vertex in the graph.
@@ -71,13 +65,6 @@ public class AdjacencyListGraph<T> implements Graph<T> {
 
     /**
      * Check if there is an edge from v1 to v2.
-     * <p>
-     * Precondition: v1 and v2 are vertices in the graph
-     * </p>
-     * <p>
-     * Postcondition: return true iff an edge from v1 connects to v2
-     * </p>
-     *
      * @param v1 is upstream vertex. Must be in the graph.
      * @param v2 is downstream vertex. Must be in the graph.
      * @return true iff an edge from v1 connects to v2
@@ -119,6 +106,7 @@ public class AdjacencyListGraph<T> implements Graph<T> {
         for (Vertex<T> v : graph.keySet()){
             vertices.add(v);
         }
+        Collections.sort(vertices, (a,b) -> a.getLabel().compareTo(b.getLabel()));
         return vertices;
     }
 
