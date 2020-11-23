@@ -76,4 +76,29 @@ public class AdjacencyListGraphTests {
 
     }
 
+    @Test
+    public void test_getVertices(){
+        Graph<Integer> list = new AdjacencyListGraph<>();
+        Vertex<Integer> a = new Vertex<>("ee", 8);
+        list.addVertex(a);
+        Vertex<Integer> b = new Vertex<>("zz", 10);
+        list.addVertex(b);
+        Vertex<Integer> c = new Vertex<>("aa", 2);
+        list.addVertex(c);
+        Vertex<Integer> d = new Vertex<>("bb", 5);
+        list.addVertex(d);
+        Vertex<Integer> e = new Vertex<>("99", 10);
+        list.addVertex(e);
+
+
+        List<Vertex> expected = new ArrayList<>();
+        expected.add(e);
+        expected.add(c);
+        expected.add(d);
+        expected.add(a);
+        expected.add(b);
+
+        assertEquals(expected, list.getVertices());
+    }
+
 }
