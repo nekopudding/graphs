@@ -122,7 +122,7 @@ public class Algorithms {
      * @param vertex     the current node
      * @param dfsSubPath the current path traversed, and to be added upon
      */
-    public static <T> void dfsRecursive(Vertex<T> vertex, List<Vertex<T>> dfsSubPath, Graph<T> graph) {
+    private static <T> void dfsRecursive(Vertex<T> vertex, List<Vertex<T>> dfsSubPath, Graph<T> graph) {
         dfsSubPath.add(vertex);
         List<Vertex<T>> neighbor = new ArrayList<>(graph.getNeighbors(vertex));
         neighbor.sort(Comparator.comparing(Vertex::getLabel));

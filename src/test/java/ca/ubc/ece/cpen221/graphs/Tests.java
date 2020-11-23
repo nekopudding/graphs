@@ -52,8 +52,48 @@ public class Tests {
     }
 
     @Test
-    public void test_dfs() {
+    public void test_dfsMatrix() {
         Graph<Integer> g = new AdjacencyMatrixGraph<>();
+        Vertex<Integer> v1 = new Vertex<Integer>("a", 10);
+        Vertex<Integer> v2 = new Vertex<>("b", 4);
+        Vertex<Integer> v3 = new Vertex<>("c", 4);
+        Vertex<Integer> v4 = new Vertex<>("d", 6);
+        g.addVertex(v1);
+        g.addVertex(v2);
+        g.addVertex(v3);
+        g.addVertex(v4);
+
+        g.addEdge(v1, v2);
+        g.addEdge(v1, v3);
+        g.addEdge(v2, v4);
+        g.addEdge(v3, v4);
+
+        List<Vertex<Integer>> path1 = new ArrayList<>();
+        path1.add(v1);
+        path1.add(v2);
+        path1.add(v4);
+        path1.add(v3);
+        List<Vertex<Integer>> path2 = new ArrayList<>();
+        path2.add(v2);
+        path2.add(v4);
+        List<Vertex<Integer>> path3 = new ArrayList<>();
+        path3.add(v3);
+        path3.add(v4);
+        List<Vertex<Integer>> path4 = new ArrayList<>();
+        path4.add(v4);
+
+        Set<List<Vertex<Integer>>> expected = new HashSet<List<Vertex<Integer>>>();
+        expected.add(path1);
+        expected.add(path2);
+        expected.add(path3);
+        expected.add(path4);
+
+        assertEquals(expected, depthFirstSearch(g));
+    }
+
+    @Test
+    public void test_dfsList() {
+        Graph<Integer> g = new AdjacencyListGraph<>();
         Vertex<Integer> v1 = new Vertex<Integer>("a", 10);
         Vertex<Integer> v2 = new Vertex<>("b", 4);
         Vertex<Integer> v3 = new Vertex<>("c", 4);
@@ -94,7 +134,7 @@ public class Tests {
     @Test
     public void test_bfs() {
         Graph<Integer> g = new AdjacencyMatrixGraph<>();
-        Vertex<Integer> v1 = new Vertex<Integer>("a", 10);
+        Vertex<Integer> v1 = new Vertex<>("a", 10);
         Vertex<Integer> v2 = new Vertex<>("b", 4);
         Vertex<Integer> v3 = new Vertex<>("c", 4);
         Vertex<Integer> v4 = new Vertex<>("d", 6);
