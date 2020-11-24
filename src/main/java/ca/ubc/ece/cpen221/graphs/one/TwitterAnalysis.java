@@ -75,6 +75,20 @@ public class TwitterAnalysis {
      * @return the smallest number of retweets required for userA's post to reach userB
      */
     public static int numRetweets(String userA, String userB) {
+        boolean flag = false;
+        Set<List<Vertex<Integer>>> graph = Algorithms.depthFirstSearch(g);
+        for (List<Vertex<Integer>> l : graph) {
+            for (int i = 0; i < l.size(); i++) {
+                if (userB.equals(l.get(0).getLabel()) && userA.equals(l.get(i).getLabel())) {
+                    flag = true;
+                }
+            }
+        }
+        if (!flag) {
+            System.err.print("userA's post will never reach userB's feed");
+            return -1;
+        }
+
         int retweets = Algorithms.shortestDistance(g, labels.get(userB), labels.get(userA)) - 1;
         return retweets;
     }

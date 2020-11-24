@@ -46,6 +46,14 @@ public class Task4Test {
     }
 
     @Test
+    public void test_retweetNotPossible() throws IOException {
+        String[] args = {"datasets/testing.txt", "numRetweets", "d", "b"};
+        TwitterAnalysis.main(args);
+        assertEquals("userA's post will never reach userB's feed", errContent.toString());
+
+    }
+
+    @Test
     public void test_common() throws IOException {
         String[] args = {"datasets/testing.txt", "commonInfluencers", "a", "b"};
         TwitterAnalysis.main(args);
