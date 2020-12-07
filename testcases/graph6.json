@@ -1,0 +1,6 @@
+{
+  "vertices": ["g", "b", "c", "d"],
+  "edges": [],
+  "center": "b",
+  "diameter": "-3"
+}
