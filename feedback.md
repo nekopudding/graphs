@@ -1,6 +1,6 @@
 # mp2 Feedback
 
-## Grade: 3.5
+## Grade: 4.0
 
 | Compilation | Timeout | Duration |
 |:-----------:|:-------:|:--------:|
@@ -55,8 +55,9 @@
 1. `testNeighbours[0] (java.lang.AssertionError: Not in lexicographic order expected:<[a, d]> but was:<[d, a]>)`
 
 ## Comments
-**Your submission is missing some feedback on Task 5, and comments on specs/RI/AF. So your score may change slightly (up to +1 or up to -0.5).**
+**Good implementation for Task 5**. Specs/RI/AF are good with minor issues.
 
+RIs and AFS are good. Specs are well done minus one missing.
 AdjacencyListGraph.java:8:	Avoid unused imports such as 'java.util.Comparator'
 
 AdjacencyListGraph.java:31:	Avoid using implementation types like 'HashMap'; use the interface instead
