@@ -6,7 +6,7 @@ import ca.ubc.ece.cpen221.graphs.two.World;
 import ca.ubc.ece.cpen221.graphs.two.items.MoveableItem;
 
 /**
- * A MoveCommand is a {@link Command} which represents a {@link MovableItem}
+ * A MoveCommand is a {@link Command} which represents a {@link MoveableItem}
  * moving. This Command moves that Item from one space in the world to another.
  */
 public final class MoveCommand implements Command {
