@@ -68,13 +68,13 @@ public class Main {
         addGrass(world);
         world.addActor(new Gardener());
 
-        addGnats(world);
+        //addGnats(world);
         addRabbits(world);
         addFoxes(world);
-        addSUVS(world);
-        addLawnmowers(world);
-        addFrogs(world);
-        addRoadSpikes(world);
+        //addSUVS(world);
+        //addLawnmowers(world);
+        //addFrogs(world);
+        //addRoadSpikes(world);
         // TODO: You may add your own creatures here!
     }
 
