@@ -148,12 +148,17 @@ public final class Util {
         Location[] neighbors = new Location[3 * 3]; // 3 x 3 bounding box
         int numLocs = 0;
         for (int x = loc.getX() - 1; x <= loc.getX() + 1; x++) {
-            for (int y = loc.getY() - 1; y <= loc.getY() + 1; y++) {
-                Location l = new Location(x, y);
-                if (isValidLocation(world, l) && isLocationEmpty(world, l)) {
-                    neighbors[numLocs] = l;
-                    numLocs++;
-                }
+            Location l = new Location(x, loc.getY());
+            if (isValidLocation(world, l) && isLocationEmpty(world, l)) {
+                neighbors[numLocs] = l;
+                numLocs++;
+            }
+        }
+        for (int y = loc.getY() - 1; y <= loc.getY() + 1; y++) {
+            Location l = new Location(loc.getX(), y);
+            if (isValidLocation(world, l) && isLocationEmpty(world, l)) {
+                neighbors[numLocs] = l;
+                numLocs++;
             }
         }
 		if (numLocs == 0) {
