@@ -1,6 +1,10 @@
-**CPEN 221 / Fall 2020 / MiniProject 2**
+**School Assignment / Fall 2020**
 
-The Graph ADT and Virtual Worlds
+In this team project, we implemented a graph ADT using Adj List and Adj Matrix implementations and created simple AIs to simulate a virtual world where animals can interact with one another, with the goal of creating a rabbit AI which will maximize its survivability.
+
+We excercised writing representation invariants, abstract functions, and method specifications.
+
+Mini Project 2: The Graph ADT and Virtual Worlds
 ===
 
 This mini-project has two parts. Part 2 can benefit from your implementation of Part 1.
