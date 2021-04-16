@@ -2,7 +2,7 @@
 
 In this team project, we implemented a graph ADT using Adj List and Adj Matrix implementations and created simple AIs to simulate a virtual world where animals can interact with one another, with the goal of creating a rabbit AI which will maximize its survivability.
 
-We excercised writing representation invariants, abstract functions, and method specifications as well as writing our own test cases using coverage and edge case testing methods.
+We exercised writing representation invariants, abstract functions, and method specifications as well as writing our own test cases using coverage and edge case testing methods.
 
 Mini Project 2: The Graph ADT and Virtual Worlds
 ===
